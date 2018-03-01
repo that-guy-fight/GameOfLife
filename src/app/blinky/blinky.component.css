@@ -1,0 +1,13 @@
+.blinker {
+    width: 20px;
+    height: 20px;
+    margin:5px;
+}
+
+.blkbg {
+    background-color: black;
+}
+
+.whtbg {
+    background-color: white;
+}

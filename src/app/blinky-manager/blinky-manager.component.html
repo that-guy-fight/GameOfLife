@@ -1,0 +1,21 @@
+<div>
+  <div>
+    Enter number of blocks:
+  </div>
+  <input [type]="number" [(ngModel)]="userNumber">
+  <div>
+    <button (click)="submitInput()">Submit</button>
+  </div>
+  <div>
+    <button (click)="activate()">Activate!</button>
+  </div>
+  <table>
+    <tbody *ngIf="childReferences.length > 0">
+      <tr *ngFor="let row of childReferences; let i = index">
+        <td *ngFor="let element of row; let j = index">
+          <app-blinky [reference]="childReferences[i][j]"></app-blinky>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
