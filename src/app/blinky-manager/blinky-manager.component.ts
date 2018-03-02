@@ -72,7 +72,7 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
         if (y < 0 || y > this.childReferences[x].length) {
           continue;
         }
-          if ((x !== i && y !== j) && this.childReferences[x][y] !== undefined
+          if ((x !== i || y !== j) && this.childReferences[x][y] !== undefined
             && this.childReferences[x][y] !== null && this.childReferences[x][y].alive === true) {
           count++;
         }
@@ -93,29 +93,8 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
         if (y < 0 || y > this.childReferences[x].length) {
           continue;
         }
-          if ((x !== i && y !== j) && this.childReferences[x][y] !== undefined
+          if ((x !== i || y !== j) && this.childReferences[x][y] !== undefined
             && this.childReferences[x][y] !== null && this.childReferences[x][y].alive === true) {
-          count++;
-        }
-        if (count > 3) { return false; }
-      }
-    }
-    if (count === 2 || count === 3) { return true; }
-    return false;
-  }
-
-  derp(i: number, j: number): boolean {
-    let count = 0;
-    for (let x = i - this.maxRange; x <= i + this.maxRange; x++) {
-      if (x < 0 || x > this.childReferences.length) {
-        continue;
-      }
-      for (let y = j - this.maxRange; y <= j + this.maxRange; y++) {
-        if (y < 0 && y > this.childReferences[x].length) {
-          continue;
-        }
-          if (this.childReferences[x][y] !== undefined && this.childReferences[x][y] !== null
-             && this.childReferences[x][y].alive === true) {
           count++;
         }
         if (count > 3) { return false; }
