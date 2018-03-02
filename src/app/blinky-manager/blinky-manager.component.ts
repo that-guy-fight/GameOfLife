@@ -65,11 +65,11 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
   checkDeadCell(i: number, j: number): boolean {
     let count = 0;
     for (let x = i - this.maxRange; x <= i + this.maxRange; x++) {
-      if (x < 0 || x > this.childReferences.length) {
+      if (x < 0 || x >= this.childReferences.length) {
         continue;
       }
       for (let y = j - this.maxRange; y <= j + this.maxRange; y++) {
-        if (y < 0 || y > this.childReferences[x].length) {
+        if (y < 0 || y >= this.childReferences[x].length) {
           continue;
         }
           if ((x !== i || y !== j) && this.childReferences[x][y] !== undefined
@@ -86,11 +86,11 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
   checkLiveCell(i: number, j: number): boolean {
     let count = 0;
     for (let x = i - this.maxRange; x <= i + this.maxRange; x++) {
-      if (x < 0 || x > this.childReferences.length) {
+      if (x < 0 || x >= this.childReferences.length) {
         continue;
       }
       for (let y = j - this.maxRange; y <= j + this.maxRange; y++) {
-        if (y < 0 || y > this.childReferences[x].length) {
+        if (y < 0 || y >= this.childReferences[x].length) {
           continue;
         }
           if ((x !== i || y !== j) && this.childReferences[x][y] !== undefined
