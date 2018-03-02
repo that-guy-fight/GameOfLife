@@ -33,7 +33,7 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
   activate() {
     this.myInterval = setInterval(() => {
       this.calculate();
-    }, 3000);
+    }, 1000);
   }
 
   initializeArrays() {
@@ -81,18 +81,6 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
     }
     if (count === 3) { return true; }
     return false;
-    // let count = 0;
-    // for (let x = i - this.maxRange; x <= i + this.maxRange; x++) {
-    //   for (let y = j - this.maxRange; y <= j + this.maxRange; y++) {
-    //     if (x >= 0 && y >= 0 && x !== i && y !== j && this.childReferences[x][y] !== undefined
-    //       && this.childReferences[x][y] !== null && this.childReferences[x][y].alive === true) {
-    //       count++;
-    //     }
-    //     if (count > 3) { return false; }
-    //   }
-    // }
-    // if (count === 3) { return true; }
-    // return false;
   }
 
   checkLiveCell(i: number, j: number): boolean {
@@ -114,19 +102,6 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
     }
     if (count === 2 || count === 3) { return true; }
     return false;
-    // let count = 0;
-    // for (let x = i - this.maxRange; x <= i + this.maxRange; x++) {
-    //   for (let y = j - this.maxRange; y <= j + this.maxRange; y++) {
-    //     if (x >= 0 && y >= 0 && (x !== i && y !== j) && x < this.childReferences.length
-    //      && y < this.childReferences[x].length && this.childReferences[x][y] !== undefined
-    //       && this.childReferences[x][y] !== null && this.childReferences[x][y].alive === true) {
-    //       count++;
-    //     }
-    //     if (count > 3) { return false; }
-    //   }
-    // }
-    // if (count === 2 || count === 3) { return true; }
-    // return false;
   }
 
   derp(i: number, j: number): boolean {
