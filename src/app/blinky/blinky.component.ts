@@ -1,12 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-blinky',
   templateUrl: './blinky.component.html',
   styleUrls: ['./blinky.component.css']
 })
-export class BlinkyComponent implements OnInit, OnChanges {
+export class BlinkyComponent implements OnInit {
   @Input('reference') reference: any;
   alive: boolean;
 
@@ -17,11 +16,7 @@ export class BlinkyComponent implements OnInit, OnChanges {
     this.alive = false;
   }
 
-  ngOnChanges(event: any) {
-    //this.alive = event.currentValue;
-  }
-
   toggleBlinker() {
-    this.reference = !this.reference;
+    this.reference.alive = !this.reference.alive;
   }
 }
