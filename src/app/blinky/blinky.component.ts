@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BlinkyComponent implements OnInit {
   @Input('reference') reference: any;
+  @Input('isRunning') isRunning: any;
   alive: boolean;
 
   constructor() { }

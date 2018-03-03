@@ -1,1 +1,1 @@
-<button class="blinker" (click)="toggleBlinker()" [ngClass]="{'blkbg': reference.alive === true, 'whtbg': reference.alive === false}"></button>
+<button class="blinker" [disabled]="isRunning.state" (click)="toggleBlinker()" [ngClass]="{'blkbg': reference.alive === true, 'whtbg': reference.alive === false}"></button>
