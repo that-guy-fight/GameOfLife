@@ -2,12 +2,14 @@
     width: 30px;
     height: 30px;
     margin:1px;
+    border: solid 1px burlywood;
+    border-radius: 3px;
 }
 
-.blkbg {
-    background-color: black;
+.alive {
+    background-color: burlywood;
 }
 
-.whtbg {
-    background-color: white;
+.dead {
+    background-color: wheat;
 }

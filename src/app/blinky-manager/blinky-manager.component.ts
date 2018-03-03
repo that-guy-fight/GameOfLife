@@ -8,6 +8,7 @@ import { NgModel } from '@angular/forms';
 })
 export class BlinkyManagerComponent implements OnInit, OnDestroy {
   userNumber: number;
+  ticSpeed: number;
   blinkyReferences: any[][];
   myInterval: any;
   myTimer: any;
@@ -15,15 +16,18 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
   maxRange = 1;
   canActivate: boolean;
   hasSubmitted: boolean;
+  invalidInput: boolean;
   isRunning = { state: false };
 
   constructor() { }
 
   ngOnInit() {
+    this.ticSpeed = 1;
     this.blinkyReferences = [];
     this.referencesCopy = [];
     this.canActivate = false;
     this.hasSubmitted = false;
+    this.invalidInput = false;
   }
 
   ngOnDestroy() {
@@ -34,8 +38,9 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
 
   submitInput() {
     if (!this.checkUserNumberInput()) {
-      //bad user input
+      this.invalidInput = true;
     } else {
+      this.invalidInput = false;
       this.canActivate = true;
       this.hasSubmitted = true;
       this.initializeArrays();
@@ -58,7 +63,7 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
     this.referencesCopy = this.cloneObject(this.blinkyReferences);
     this.myInterval = setInterval(() => {
       this.calculate();
-    }, 1000);
+    }, this.ticSpeed * 1000);
   }
 
   stop() {
@@ -69,10 +74,17 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
     }
   }
 
+  reset() {
+    this.userNumber = null;
+    this.canActivate = false;
+    this.referencesCopy = [];
+    this.blinkyReferences = [];
+  }
+
   calculate() {
     for (let i = 0; i < this.referencesCopy.length; i++) {
       for (let j = 0; j < this.referencesCopy[i].length; j++) {
-        this.checkNeighbors(i, j);
+        this.referencesCopy[i][j].alive = this.checkNeighbors(i, j);
       }
     }
     this.blinkyReferences = this.cloneObject(this.referencesCopy);
@@ -115,7 +127,8 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
   }
 
   checkInputKey(event: any) {
-    if (event.key === 'Enter' && this.userNumber !== undefined) {
+    if (event.key === 'Enter' && event.srcElement.name === 'userNumber'
+      && this.userNumber !== undefined) {
       this.submitInput();
     } else {
       const numberPattern = /^[0-9]$/;
@@ -127,8 +140,7 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
 
   checkUserNumberInput(): boolean {
     const validPattern = /^[0-9]+$/;
-    if (!validPattern.test(this.userNumber.toString())) {
-      //bad user input
+    if (!this.userNumber || !validPattern.test(this.userNumber.toString())) {
       return false;
     }
     return true;
