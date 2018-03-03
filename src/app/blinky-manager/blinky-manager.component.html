@@ -5,14 +5,13 @@
         Type number of cells and press 'Enter':
       </div>
       <div>
-        <input name="userNumber" [type]="number" [(ngModel)]="userNumber" (keyup.enter)="submitInput()" (keypress)="checkInputKey($event)">
-        <div [ngClass]="{'invisible' : !invalidInput}" class="errorText">Incorrect input format</div>
+        <input name="cellCount" [type]="number" [(ngModel)]="cellCount" (keyup.enter)="submitInput()" (keypress)="checkInputKey($event)">
+        <div [ngClass]="{'invisible' : !invalidCountInput}" class="errorText">Incorrect input format</div>
       </div>
-
       <div>
-        <button [disabled]="!canActivate" (click)="activate()">Activate</button>
         <button (click)="stop()">Stop</button>
         <button (click)="reset()">Reset</button>
+        <button [disabled]="!canActivate || cellCount.length === 0" (click)="activate()">Activate</button>
       </div>
     </form>
   </div>

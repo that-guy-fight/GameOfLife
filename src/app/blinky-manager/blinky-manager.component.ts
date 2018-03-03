@@ -7,7 +7,7 @@ import { NgModel } from '@angular/forms';
   styleUrls: ['./blinky-manager.component.css']
 })
 export class BlinkyManagerComponent implements OnInit, OnDestroy {
-  userNumber: number;
+  cellCount: number;
   ticSpeed: number;
   blinkyReferences: any[][];
   myInterval: any;
@@ -49,9 +49,9 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
 
   initializeArrays() {
     this.blinkyReferences = [];
-    for (let i = 0; i < this.userNumber; i++) {
+    for (let i = 0; i < this.cellCount; i++) {
       this.blinkyReferences[i] = [];
-      for (let j = 0; j < this.userNumber; j++) {
+      for (let j = 0; j < this.cellCount; j++) {
         this.blinkyReferences[i][j] = { x: i, y: j, alive: false };
       }
     }
@@ -75,8 +75,10 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
   }
 
   reset() {
-    this.userNumber = null;
+    this.stop();
+    this.cellCount = null;
     this.canActivate = false;
+    this.invalidInput = false;
     this.referencesCopy = [];
     this.blinkyReferences = [];
   }
@@ -128,7 +130,7 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
 
   checkInputKey(event: any) {
     if (event.key === 'Enter' && event.srcElement.name === 'userNumber'
-      && this.userNumber !== undefined) {
+      && this.cellCount !== undefined) {
       this.submitInput();
     } else {
       const numberPattern = /^[0-9]$/;
@@ -140,7 +142,7 @@ export class BlinkyManagerComponent implements OnInit, OnDestroy {
 
   checkUserNumberInput(): boolean {
     const validPattern = /^[0-9]+$/;
-    if (!this.userNumber || !validPattern.test(this.userNumber.toString())) {
+    if (!this.cellCount || !validPattern.test(this.cellCount.toString())) {
       return false;
     }
     return true;
